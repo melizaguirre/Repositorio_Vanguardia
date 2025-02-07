@@ -1,3 +1,14 @@
+const mongoose = require('mongoose');
+
+const mongoURI = 'mongodb+srv://cluster0.t8a2t.mongodb.net/';
+
+// Conectar a MongoDB
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ Conectado a MongoDB'))
+.catch(err => console.error('❌ Error al conectar a MongoDB:', err));
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
