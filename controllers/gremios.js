@@ -1,10 +1,18 @@
+const Gremio = require('../models/Gremio');
+
 let gremios = []; 
 
-const agregarGremio = (req, res) => {
-    const { id, nombre, casas, cantidad, status } = req.body;
-    gremios.push({ id, nombre, casas, cantidad, status, miembros: [] });
-    res.status(201).json({ message: "Gremio agregado correctamente", gremios });
+const agregarGremio = async (req, res) => {
+  try {
+      const { id, nombre, casas, cantidad, status } = req.body;
+      const nuevoGremio = new Gremio({ id, nombre, casas, cantidad, status, miembros: [] });
+      await nuevoGremio.save();
+      res.status(201).json({ message: "Gremio agregado correctamente", gremio: nuevoGremio });
+  } catch (error) {
+      res.status(500).json({ message: "Error al agregar el gremio", error });
+  }
 };
+
 
 const actualizarGremio = (req, res) => {
     const { id } = req.params;
@@ -20,7 +28,14 @@ const eliminarGremio = (req, res) => {
     res.json({ message: "Gremio eliminado", gremios });
 };
 
-const obtenerGremios = (req, res) => res.json(gremios);
+const obtenerGremios = async (req, res) => {
+  try {
+      const gremios = await Gremio.find().populate('miembros');
+      res.json(gremios);
+  } catch (error) {
+      res.status(500).json({ message: "Error al obtener los gremios", error });
+  }
+};
 
 const agregarMiembro = (req, res) => {
     const { id } = req.params;
