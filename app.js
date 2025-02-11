@@ -9,6 +9,9 @@ mongoose.connect(mongoURI, {
 })
 .then(() => console.log('✅ Conectado a MongoDB'))
 .catch(err => console.error('❌ Error al conectar a MongoDB:', err));
+require('dotenv').config()
+console.log(process.env.NEW_API)
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
