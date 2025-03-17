@@ -1,6 +1,7 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb+srv://cluster0.t8a2t.mongodb.net/';
+const mongoURI = 'mongodb+srv://admin:admin@cluster0.t8a2t.mongodb.net/';
 
 // Conectar a MongoDB
 mongoose.connect(mongoURI, {
@@ -9,7 +10,8 @@ mongoose.connect(mongoURI, {
 })
 .then(() => console.log('✅ Conectado a MongoDB'))
 .catch(err => console.error('❌ Error al conectar a MongoDB:', err));
-require('dotenv').config()
+
+
 console.log(process.env.NEW_API)
 
 var createError = require('http-errors');

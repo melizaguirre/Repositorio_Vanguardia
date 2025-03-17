@@ -5,8 +5,17 @@ let gremios = [];
 const agregarGremio = async (req, res) => {
   try {
       const { id, nombre, casas, cantidad, status } = req.body;
+
+      console.log(req.body)
+
+
       const nuevoGremio = new Gremio({ id, nombre, casas, cantidad, status, miembros: [] });
+      
+      console.log(nuevoGremio)
+      
+
       await nuevoGremio.save();
+
       res.status(201).json({ message: "Gremio agregado correctamente", gremio: nuevoGremio });
   } catch (error) {
       res.status(500).json({ message: "Error al agregar el gremio", error });
